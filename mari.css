@@ -1,0 +1,682 @@
+/* Importar fuente moderna y limpia */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap');
+
+/* 1. Variables y Reseteo Base */
+:root {
+    --color-principal: #535353;      /* Negro */
+    --color-acento: hsl(0, 62%, 54%);         /* Color topo/Sienna */
+    --color-fondo-claro: #fb00ff;
+    --color-fondo-oscuro: #000000;
+    --transicion-suave: 0.5s ease-in-out;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body, html {
+    font-family: 'Montserrat', sans-serif;
+    color: var(--color-principal);
+    scroll-behavior: smooth; /* Hace la transición suave entre diapositivas */
+    overflow-x: hidden;
+}
+
+/* 2. Estilo Central de Diapositivas (Full Screen) */
+.diapositiva {
+    height: 100vh; /* Ocupa el 100% de la altura de la ventana */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 5vh 5vw; /* Padding responsivo */
+    background-color: var(--color-fondo-claro);
+    transition: background-color var(--transicion-suave);
+}
+
+.titulo-slide {
+    font-size: 3em;
+    font-weight: 700;
+    margin-bottom: 50px;
+    color: var(--color-principal);
+}
+
+/* 3. Diapositiva de Inicio (Hero) */
+#diapositiva-inicio {
+    background: url('placeholder-fondo.jpg') center/cover no-repeat;
+    color: var(--color-fondo-claro);
+    position: relative;
+}
+
+/* Oscurecer el fondo para que el texto se vea bien */
+#diapositiva-inicio::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgb(0, 0, 0); 
+    z-index: 1;
+}
+
+.hero-slide .contenido-slide {
+    z-index: 2;
+}
+
+#diapositiva-inicio h1 {
+    font-size: 5em;
+    font-weight: 700;
+    letter-spacing: 5px;
+    margin-bottom: 20px;
+}
+
+.etiqueta {
+    font-size: 1em;
+    font-weight: 300;
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+}
+
+.subtitulo {
+    font-size: 1.5em;
+    font-weight: 400;
+    margin-bottom: 40px;
+}
+
+/* 4. Estilos Generales de Botones */
+.btn {
+    display: inline-block;
+    padding: 12px 30px;
+    background-color: var(--color-acento);
+    color: var(--color-fondo-claro);
+    border: 2px solid var(--color-acento);
+    text-transform: uppercase;
+    font-weight: 600;
+    letter-spacing: 1px;
+    border-radius: 2px;
+    transition: all 0.3s;
+}
+
+.btn:hover {
+    background-color: #dd00ff; /* Marrón más oscuro */
+    border-color: #ff00bb;
+}
+
+.secondary-btn {
+    background-color: transparent;
+    color: var(--color-principal);
+    border: 2px solid var(--color-principal);
+    margin: 0 10px;
+}
+
+.secondary-btn:hover {
+    background-color: var(--color-principal);
+    color: var(--color-fondo-claro);
+}
+
+
+/* 5. Diapositiva de Productos */
+.productos-slide {
+    background-color: var(--color-fondo-oscuro);
+}
+
+.lista-productos {
+    display: grid;
+    /* Cuadrícula 2x2 para impacto visual en pantallas grandes */
+    grid-template-columns: repeat(2, 1fr); 
+    gap: 30px;
+    max-width: 900px;
+    width: 100%;
+}
+
+.producto {
+    background-color: var(--color-fondo-claro);
+    box-shadow: 0 4px 10px rgb(0, 0, 0);
+    padding: 15px;
+    transition: transform 0.3s;
+}
+
+.producto:hover {
+    transform: scale(1.03);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);s
+}
+
+.producto img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    margin-bottom: 10px;
+}
+
+.producto h3 {
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.precio {
+    font-weight: 700;
+    color: var(--color-acento);
+    margin-bottom: 10px;
+}
+
+.btn-agregar {
+    padding: 8px 20px;
+    background-color: var(--color-principal);
+    color: var(--color-fondo-claro);
+    border: none;
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: background-color 0.3s;
+}
+
+.btn-agregar:hover {
+    background-color: var(--color-acento);
+}
+
+/* 6. Navegación Lateral (Puntos de Diapositiva) */
+.nav-lateral {
+    position: fixed;
+    right: 30px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    z-index: 1000;
+}
+
+.nav-lateral a {
+    display: block;
+    width: 12px;
+    height: 12px;
+    border: 2px solid var(--color-principal);
+    border-radius: 50%;
+    transition: background-color 0.3s;
+    /* Usa el pseudo-clase target para resaltar la diapositiva actual */
+}
+
+/* Resaltar el punto de navegación si la diapositiva está activa */
+#diapositiva-inicio:target ~ .nav-lateral a:nth-child(1),
+#diapositiva-productos:target ~ .nav-lateral a:nth-child(2),
+#diapositiva-contacto:target ~ .nav-lateral a:nth-child(3) {
+    background-color: var(--color-acento);
+    border-color: var(--color-acento);
+}
+
+/* Estilo por defecto si no se ha hecho scroll (inicio) */
+:root:not(:has(:target)) #diapositiva-inicio ~ .nav-lateral a:nth-child(1) {
+    background-color: var(--color-acento);
+    border-color: var(--color-acento);
+}
+
+/* 7. Responsive */
+@media (max-width: 768px) {
+    #diapositiva-inicio h1 {
+        font-size: 3em;
+    }
+    .titulo-slide {
+        font-size: 2em;
+        margin-bottom: 30px;
+    }
+    .subtitulo {
+        font-size: 1.2em;
+    }
+    .lista-productos {
+        grid-template-columns: 1fr; /* Una sola columna en móvil */
+        gap: 20px;
+    }
+    .nav-lateral {
+        right: 10px;
+        gap: 10px;
+    }
+}
+/* --------------------------------- */
+/* 7. Estilos de la Diapositiva del Blog */
+/* --------------------------------- */
+.blog-slide {
+    background-color: var(--color-fondo-claro);
+    /* Alineamos al centro, pero los artículos son flexibles */
+}
+
+.lista-articulos {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-bottom: 40px;
+    max-width: 1100px;
+    width: 90%;
+}
+
+.articulo-blog {
+    flex: 1; /* Ocupan espacio igual */
+    background-color: var(--color-fondo-oscuro);
+    padding: 20px;
+    text-align: left;
+    transition: box-shadow 0.3s, transform 0.3s;
+    border-left: 3px solid var(--color-principal);
+}
+
+.articulo-blog:hover {
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    transform: translateY(-5px);
+}
+
+.articulo-blog img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    margin-bottom: 15px;
+}
+
+.articulo-blog h3 {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    font-size: 1.2em;
+    margin-bottom: 5px;
+    color: var(--color-acento);
+}
+
+.fecha {
+    font-size: 0.85em;
+    color: #888;
+    margin-bottom: 15px;
+}
+
+.leer-mas {
+    display: inline-block;
+    color: var(--color-principal);
+    font-weight: 600;
+    transition: color 0.3s;
+}
+
+.leer-mas:hover {
+    color: var(--color-acento);
+}
+
+/* Estilo especial para el Artículo Destacado */
+.articulo-blog.destacado {
+    background-color: var(--color-principal);
+    color: var(--color-fondo-claro);
+    border-left-color: var(--color-acento);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.articulo-blog.destacado h3 {
+    color: var(--color-fondo-claro);
+    font-size: 1.5em;
+    margin-bottom: 20px;
+}
+
+.articulo-blog.destacado .leer-mas {
+    /* Usamos la clase primary-btn de los botones generales */
+    background-color: var(--color-acento);
+    color: var(--color-fondo-claro);
+    padding: 10px 20px;
+    border-radius: 2px;
+}
+
+/* --------------------------------- */
+/* 8. Responsive para Blog y Diapositivas (ajustar media queries) */
+/* --------------------------------- */
+
+@media (max-width: 900px) {
+    .lista-articulos {
+        flex-direction: column; /* Apilar artículos en móviles */
+        width: 80%;
+    }
+    .articulo-blog {
+        max-width: 100%;
+    }
+}
+
+/* Asegúrate de que las media queries anteriores sigan funcionando bien para las otras diapositivas.
+   Además, ajustamos la lógica de la navegación lateral para incluir la 4ta diapositiva. */
+
+/* Resaltar el punto de navegación si la diapositiva está activa */
+#diapositiva-inicio:target ~ .nav-lateral a:nth-child(1),
+#diapositiva-productos:target ~ .nav-lateral a:nth-child(2),
+/* ¡Actualización! El 3er hijo es el Blog */
+#diapositiva-blog:target ~ .nav-lateral a:nth-child(3), 
+/* ¡Actualización! El 4to hijo es Contacto */
+#diapositiva-contacto:target ~ .nav-lateral a:nth-child(4) { 
+    background-color: var(--color-acento);
+    border-color: var(--color-acento);
+}
+/* --------------------------------- */
+/* 9. Estilos Específicos para BLOG.HTML */
+/* --------------------------------- */
+
+/* Encabezado del Blog */
+.blog-header {
+    background-color: var(--color-principal);
+    color: var(--color-fondo-claro);
+    padding: 30px 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: none; /* Quitamos la sombra para un look más sólido */
+}
+
+.blog-header h1 {
+    color: var(--color-fondo-claro);
+    font-size: 2em;
+    font-family: 'Lora', serif;
+}
+
+.blog-header nav a {
+    color: var(--color-fondo-claro);
+    font-weight: 400;
+}
+
+.blog-header nav a:hover {
+    color: var(--color-acento);
+    border-bottom: 2px solid var(--color-acento);
+}
+
+/* Contenido Principal del Blog */
+.blog-main {
+    padding: 50px 10%;
+    min-height: 80vh; /* Asegura que la página sea alta */
+    background-color: var(--color-fondo-oscuro);
+}
+
+.seccion-articulos h2 {
+    font-size: 2.5em;
+    font-family: 'Lora', serif;
+    margin-bottom: 40px;
+    border-bottom: 2px solid var(--color-acento);
+    display: inline-block;
+    padding-bottom: 5px;
+}
+
+.lista-blog-completa {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.articulo-completo {
+    display: flex;
+    background-color: var(--color-fondo);
+    border: 1px solid #ddd;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    transition: box-shadow 0.3s;
+}
+
+.articulo-completo:hover {
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.articulo-completo img {
+    width: 300px;
+    height: 200px;
+    object-fit: cover;
+    flex-shrink: 0; /* Evita que la imagen se reduzca */
+}
+
+.info-post {
+    padding: 20px;
+}
+
+.info-post h3 {
+    font-size: 1.5em;
+    color: var(--color-acento);
+    margin-bottom: 10px;
+}
+
+.meta {
+    font-size: 0.9em;
+    color: #888;
+    margin-bottom: 15px;
+}
+
+.leer-completo {
+    display: inline-block;
+    margin-top: 15px;
+    color: var(--color-principal);
+    font-weight: 600;
+    transition: color 0.3s;
+}
+
+.leer-completo:hover {
+    color: var(--color-acento);
+}
+
+/* Pie de página del Blog */
+.blog-footer {
+    background-color: var(--color-principal);
+    color: #999;
+    text-align: center;
+    padding: 20px;
+}
+
+.blog-footer a {
+    color: var(--color-acento);
+    transition: color 0.3s;
+}
+
+/* Responsive para el Blog */
+@media (max-width: 768px) {
+    .articulo-completo {
+        flex-direction: column; /* Apilar imagen y texto en móvil */
+    }
+    .articulo-completo img {
+        width: 100%;
+        height: auto;
+    }
+    .blog-header {
+        flex-direction: column;
+        text-align: center;
+    }
+    .blog-header nav {
+        margin-top: 10px;
+    }
+}
+/* --------------------------------- */
+/* 10. Estilos Específicos para el Artículo Individual (blog-post-1.html) */
+/* --------------------------------- */
+
+.post-main {
+    padding: 50px 10%;
+    min-height: 80vh;
+    background-color: var(--color-fondo-oscuro);
+    display: flex;
+    justify-content: center;
+}
+
+.articulo-post {
+    max-width: 800px; /* Ancho máximo para fácil lectura */
+    background-color: var(--color-fondo);
+    padding: 40px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+}
+
+.post-titulo {
+    font-family: 'Lora', serif;
+    font-size: 2.8em;
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 10px;
+    color: var(--color-principal);
+}
+
+.post-meta {
+    font-size: 0.9em;
+    color: #888;
+    margin-bottom: 25px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 15px;
+}
+
+.post-imagen-principal {
+    width: 100%;
+    height: auto;
+    max-height: 450px;
+    object-fit: cover;
+    margin-bottom: 30px;
+    border-radius: 5px;
+}
+
+.post-contenido h3 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.8em;
+    color: var(--color-acento);
+    margin: 30px 0 15px;
+}
+
+.post-contenido h4 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.4em;
+    color: var(--color-principal);
+    margin: 20px 0 10px;
+}
+
+.post-contenido p {
+    margin-bottom: 20px;
+    line-height: 1.7;
+    font-weight: 400;
+}
+
+.cita-estilo {
+    border-left: 5px solid var(--color-acento);
+    padding-left: 20px;
+    margin: 30px 0;
+    font-style: italic;
+    color: #555;
+    font-size: 1.1em;
+}
+
+.post-pie {
+    text-align: center;
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid #eee;
+}
+
+/* Responsive para el Post */
+@media (max-width: 768px) {
+    .articulo-post {
+        padding: 20px;
+    }
+    .post-titulo {
+        font-size: 2em;
+    }
+    .post-contenido h3 {
+        font-size: 1.5em;
+    }
+}
+/* --------------------------------- */
+/* 11. Estilos Específicos para Contacto Directo (contacto.html) */
+/* --------------------------------- */
+
+.contacto-main {
+    padding: 50px 10%;
+    min-height: 80vh;
+    background-color: var(--color-fondo-oscuro);
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+}
+
+.seccion-contacto-directo {
+    max-width: 900px;
+    width: 100%;
+    background-color: var(--color-fondo);
+    padding: 50px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    text-align: center;
+}
+
+.titulo-contacto {
+    font-family: 'Lora', serif;
+    font-size: 2.8em;
+    color: var(--color-principal);
+    margin-bottom: 10px;
+}
+
+.subtitulo-form {
+    font-size: 1.2em;
+    color: #666;
+    margin-bottom: 50px;
+}
+
+.opciones-contacto {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+}
+
+.opcion-telefono, .opcion-whatsapp {
+    flex: 1;
+    padding: 30px;
+    border: 1px solid #eee;
+    border-radius: 5px;
+    transition: box-shadow 0.3s, transform 0.3s;
+    background-color: var(--color-claro);
+}
+
+.opcion-telefono:hover, .opcion-whatsapp:hover {
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+    transform: translateY(-3px);
+}
+
+.icono-contacto {
+    font-size: 3em;
+    display: block;
+    margin-bottom: 15px;
+}
+
+.opcion-telefono h3, .opcion-whatsapp h3 {
+    font-weight: 600;
+    font-size: 1.5em;
+    color: var(--color-principal);
+    margin-bottom: 10px;
+}
+
+.numero-grande a {
+    font-size: 1.8em;
+    font-weight: 700;
+    color: var(--color-acento);
+    display: block;
+    margin: 15px 0;
+    transition: color 0.3s;
+}
+
+.btn-whatsapp {
+    margin-top: 20px;
+    background-color: #25D366; /* Color de WhatsApp */
+    border-color: #25D366;
+    padding: 15px 30px;
+    font-size: 1.1em;
+}
+
+.btn-whatsapp:hover {
+    background-color: #1DA851;
+}
+
+/* Responsive para el contacto */
+@media (max-width: 768px) {
+    .opciones-contacto {
+        flex-direction: column;
+        gap: 20px;
+    }
+    .seccion-contacto-directo {
+        padding: 30px;
+    }
+    .titulo-contacto {
+        font-size: 2em;
+    }
+    .numero-grande a {
+        font-size: 1.5em;
+    }
+}
